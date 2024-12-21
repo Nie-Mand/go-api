@@ -1,3 +1,4 @@
 # Required Features in the API structure
 
 - [x] Task management with Taskfile
+- [ ] Pre-commit hooks with pre-commit
