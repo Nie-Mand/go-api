@@ -2,6 +2,8 @@ package internal
 
 import (
 	"github.com/Nie-Mand/go-api/internal/api"
+	hello_api "github.com/Nie-Mand/go-api/internal/api/hello"
+
 	// auth_api "github.com/Nie-Mand/anas-init/internal/api/auth"
 	// sites_api "github.com/Nie-Mand/anas-init/internal/api/sites"
 	// "github.com/Nie-Mand/anas-init/internal/core/services/auth"
@@ -35,12 +37,12 @@ func Run() error {
 	// })
 
 	// Register API
-	api.NewAPI(func(a *api.API) {
+	_api := api.NewAPI(func(a *api.API) {
 		a.E = e.E
 		// a.Auth = authS
 		// a.Sites = sitesS
 	})
-	// auth_api.RegisterAuthController(_api)
+	hello_api.RegisterHelloController(_api)
 	// sites_api.RegisterSitesController(_api)
 	return e.Start()
 }

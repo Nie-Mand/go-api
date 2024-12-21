@@ -4,3 +4,4 @@
 - [ ] Pre-commit hooks with pre-commit
 - [ ] Use wire for dependency injection
 - [ ] API Testing with `apitest.dev`
+- [ ] Script to update project name in all files
