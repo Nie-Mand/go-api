@@ -1,4 +1,4 @@
-package echo
+package middlewares
 
 import (
 	"github.com/go-playground/validator/v10"

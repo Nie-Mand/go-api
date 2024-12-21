@@ -12,8 +12,7 @@ import (
 func main() {
 	err := log.InitLogger("debug", "dev")
 	handleError(err)
-
-	internal.Run()
+	handleError(internal.Run())
 }
 
 func handleError(err error) {

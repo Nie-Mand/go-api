@@ -13,7 +13,7 @@ import (
 	// "github.com/Nie-Mand/anas-init/pkg/utils/jwt"
 )
 
-func Run() {
+func Run() error {
 	// db, err := db.New()
 	// handleError(err)
 	// defer db.Close()
@@ -42,5 +42,5 @@ func Run() {
 	})
 	// auth_api.RegisterAuthController(_api)
 	// sites_api.RegisterSitesController(_api)
-	e.Start()
+	return e.Start()
 }
