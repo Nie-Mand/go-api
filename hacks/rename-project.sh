@@ -6,14 +6,18 @@ TOOL="task utils:rename-project --"
 DEFAULT_PROJECT_NAME=github.com/Nie-Mand/go-api
 PROJECT_NAME=$1
 
+function escape() {
+    echo $1 | sed 's/\./\\./g' | sed 's/\//\\\//g'
+}
+
 if [ -z "$PROJECT_NAME" ]; then
     echo "Usage: $TOOL <project-name>"
     echo "Example: $TOOL github.com/Nie-Mand/go-api"
     exit 0
 fi
 
-# TODO: Replace all occurrences of the default project name with the new project name
-# find . -path ./.git -prune -o -type f -exec sed -i "s,$DEFAULT_PROJECT_NAME,$PROJECT_NAME,g" {} +
-# -exec sed -i "s,$DEFAULT_PROJECT_NAME,$PROJECT_NAME,g" {} +
+ESCAPED_DEFAULT_PROJECT_NAME=$(escape $DEFAULT_PROJECT_NAME)
+ESCAPED_PROJECT_NAME=$(escape $PROJECT_NAME)
 
+find . -type f -not -path "./.git/*" -exec sed -i '' "s/$ESCAPED_DEFAULT_PROJECT_NAME/$ESCAPED_PROJECT_NAME/g" {} +
 echo "Done"
