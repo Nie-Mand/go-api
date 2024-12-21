@@ -3,6 +3,10 @@ package internal
 import (
 	"github.com/Nie-Mand/go-api/internal/api"
 	hello_api "github.com/Nie-Mand/go-api/internal/api/hello"
+	"github.com/Nie-Mand/go-api/internal/core/services/hello"
+	"github.com/Nie-Mand/go-api/pkg/db"
+	"github.com/Nie-Mand/go-api/pkg/db/repositories"
+	"github.com/Nie-Mand/go-api/pkg/gateways/pubsub"
 
 	// auth_api "github.com/Nie-Mand/anas-init/internal/api/auth"
 	// sites_api "github.com/Nie-Mand/anas-init/internal/api/sites"
@@ -16,33 +20,29 @@ import (
 )
 
 func Run() error {
-	// db, err := db.New()
-	// handleError(err)
-	// defer db.Close()
+	db, err := db.New()
+	if err != nil {
+		return err
+	}
 
-	// usersR := repos.NewUsersRepository(db)
-	// sitesR := repos.NewSitesRepository(db)
+	defer db.Close()
 
-	e := echo.NewEchoServer(echo.NewEchoConfig("8080"))
+	// Repositories and Gateways
+	helloR := repositories.NewHelloRepository(db)
+	ps := pubsub.NewPubSubClient()
 
 	// Services
-	// authS := auth.NewAuthService(func(a *auth.AuthService) {
-	// 	a.Users = usersR
-	// 	a.Bcrypt = bcrypt.NewBcrypt()
-	// 	a.JWT = jwt.NewJWT("secret-string", 10)
-	// })
-
-	// sitesS := sites.NewSitesService(func(s *sites.SitesService) {
-	// 	s.Sites = sitesR
-	// })
+	helloS := hello.NewHelloService(func(s *hello.HelloService) {
+		s.Hello = helloR
+		s.PubSub = ps
+	})
 
 	// Register API
+	e := echo.NewEchoServer(echo.NewEchoConfig("8080"))
 	_api := api.NewAPI(func(a *api.API) {
 		a.E = e.E
-		// a.Auth = authS
-		// a.Sites = sitesS
+		a.Hello = helloS
 	})
 	hello_api.RegisterHelloController(_api)
-	// sites_api.RegisterSitesController(_api)
 	return e.Start()
 }

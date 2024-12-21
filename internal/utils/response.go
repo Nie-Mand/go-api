@@ -17,6 +17,6 @@ func NewAPIResponse[Data any](message string, data ...Data) *APIResponse[Data] {
 	return response
 }
 
-func NewAPIErrorResponse(code int, message string) (int, *APIResponse[any]) {
-	return code, &APIResponse[any]{Message: message}
+func NewAPIErrorResponse(code int, error error) (int, *APIResponse[any]) {
+	return code, &APIResponse[any]{Message: error.Error()}
 }
