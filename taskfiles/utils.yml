@@ -1,0 +1,7 @@
+version: "3"
+
+tasks:
+  rename-project:
+    cmds:
+      - ./hacks/rename-project.sh {{.CLI_ARGS}}
+    silent: true
