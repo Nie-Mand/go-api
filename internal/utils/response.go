@@ -1,22 +1,36 @@
 package utils
 
-type APIResponse[Data any] struct {
-	Message string `json:"message"`
-	Data    *Data  `json:"data,omitempty"`
+type APIResponse[D comparable] struct {
+	Message string       `json:"message" example:"success"`
+	Result  *interface{} `json:"result,omitempty"`
 }
 
-func NewAPIResponse[Data any](message string, data ...Data) *APIResponse[Data] {
-	response := &APIResponse[Data]{
+type PaginatedAPIResponse[D comparable] struct {
+	Message  string `json:"message" example:"success"`
+	Page     int    `json:"page" example:"1"`
+	PageSize int    `json:"pageSize" example:"10"`
+	Result   []D    `json:"result"`
+}
+
+func NewAPIResponse(message string, data ...interface{}) *APIResponse[interface{}] {
+	response := &APIResponse[interface{}]{
 		Message: message,
 	}
 
 	if len(data) > 0 {
-		response.Data = &data[0]
+		response.Result = &data[0]
 	}
 
 	return response
 }
 
-func NewAPIErrorResponse(code int, error error) (int, *APIResponse[any]) {
-	return code, &APIResponse[any]{Message: error.Error()}
+func NewPaginatedResponse[D comparable](message string, page int, size int, data []D) *PaginatedAPIResponse[D] {
+	response := &PaginatedAPIResponse[D]{
+		Message:  message,
+		Page:     page,
+		PageSize: size,
+		Result:   data,
+	}
+
+	return response
 }
