@@ -2,3 +2,5 @@
 
 - [x] Task management with Taskfile
 - [ ] Pre-commit hooks with pre-commit
+- [ ] Use wire for dependency injection
+- [ ] API Testing with `apitest.dev`
