@@ -1,7 +1,8 @@
 package echo
 
 import (
-	"github.com/Nie-Mand/go-api/internal/utils/middlewares"
+	"github.com/Nie-Mand/go-api/internal/utils/middlewares/upload"
+	"github.com/Nie-Mand/go-api/internal/utils/middlewares/validator"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"go.uber.org/zap"
@@ -16,7 +17,8 @@ func NewEchoServer(cfg EchoConfig) EchoServer {
 	e := echo.New()
 
 	// Setup the middlewares here
-	e.Validator = middlewares.NewValidator()
+	e.Validator = validator.NewValidator()
+	e.Binder = upload.NewBinder(e.Binder)
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 
