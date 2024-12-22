@@ -5,3 +5,8 @@ tasks:
     cmds:
       - go run cmd/main.go
     silent: true
+
+  swagger:
+    cmds:
+      - swag init -g internal/api/swagger.go -o internal/docs
+    silent: true

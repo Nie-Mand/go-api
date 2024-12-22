@@ -44,5 +44,6 @@ func Run() error {
 		a.Hello = helloS
 	})
 	hello_api.RegisterHelloController(_api)
+	api.RegisterSwaggerDocumentation(_api)
 	return e.Start()
 }

@@ -7,8 +7,16 @@ import (
 	"go.uber.org/zap"
 )
 
+// @Summary				Hello world
+// @Description 			Hello world
+// @securityDefinitions.ConfigAPIkey ConfigAPIKeyAuth
+// @in header
+// @name Authorization
+// @Tags			Hello
+// @Accept			json
+// @Success		200	{object} utils.APIResponse{result=WorldResponse}
+// @Router			/hello/world [get]
 func (api *HelloController) World(c echo.Context) error {
-
 	hello, err := api.R.Hello.HelloWorld()
 	if err != nil {
 		zap.L().Error("Failed to get hello world", zap.Error(err))

@@ -2,6 +2,8 @@ package hello_api
 
 import "github.com/Nie-Mand/go-api/internal/api"
 
+// @tag.name			Hello
+// @tag.description	An Endpoint that handles hello world
 type HelloController struct {
 	R *api.API
 }

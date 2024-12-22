@@ -1,0 +1,39 @@
+basePath: /
+definitions:
+  hello_api.WorldResponse:
+    properties:
+      hello:
+        type: string
+    type: object
+  utils.APIResponse:
+    properties:
+      message:
+        example: success
+        type: string
+      result: {}
+    type: object
+info:
+  contact: {}
+  description: This backend behind the Go API
+  title: Go API
+  version: "0.1"
+paths:
+  /hello/world:
+    get:
+      consumes:
+      - application/json
+      description: Hello world
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/utils.APIResponse'
+            - properties:
+                result:
+                  $ref: '#/definitions/hello_api.WorldResponse'
+              type: object
+      summary: Hello world
+      tags:
+      - Hello
+swagger: "2.0"
