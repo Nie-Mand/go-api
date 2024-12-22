@@ -5,8 +5,8 @@ import (
 
 	"github.com/Nie-Mand/go-api/internal"
 	"github.com/Nie-Mand/go-api/internal/utils/log"
+	_ "github.com/joho/godotenv/autoload"
 	"go.uber.org/zap"
-	// _ "github.com/joho/godotenv/autoload"
 )
 
 func main() {
