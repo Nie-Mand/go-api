@@ -33,7 +33,7 @@ task dev
 ```
 .
 ├── cmd/              # Application entry points
-├── hacks/            # Scripts and tools
+├── hack/             # Scripts and tools
 ├── internal/         # Private application and library code
 │   ├── api/         # API controllers and routes
 │   ├── utils/       # Utility functions
