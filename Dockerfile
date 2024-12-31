@@ -14,12 +14,12 @@ COPY pkg ./pkg
 
 RUN mkdir bin
 
-RUN CGO_ENABLED=0 GOOS=linux go build -o /bin/server
+RUN CGO_ENABLED=0 GOOS=linux go build -o /bin/main
 
 FROM alpine:latest
 
-COPY --from=0 /bin/server /bin/server
+COPY --from=0 /bin/main /bin/main
 
 EXPOSE 1323
 
-CMD ["/bin/server"]
+CMD ["/bin/main"]
